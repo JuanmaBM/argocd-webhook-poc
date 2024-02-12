@@ -1,19 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: nginx-deployment
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: nginx
+  replicas: 1
   template:
     metadata:
       labels:
         app: nginx
     spec:
       containers:
-        - name: nginx
-          image: docker.io/library/nginx:latest
-          ports:
-            - containerPort: 80
+      - name: nginx
+        image: nginx:latest
+        # securityContext:
+        #   allowPrivilegeEscalation: false
+        #   runAsNonRoot: true
+        #   seccompProfile:
+        #     type: RuntimeDefault
+        #   capabilities:
+        #     drop:
+        #     - ALL
+        ports:
+        - containerPort: 80
