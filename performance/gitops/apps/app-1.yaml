@@ -9,7 +9,7 @@ spec:
     namespace: performance
   source:
     repoURL: 'https://github.com/JuanmaBM/argocd-webhook-poc'
-    path: performance/gitops/go-toolset
+    path: performance/gitops/hello-api
     targetRevision: HEAD
   sources: []
   project: 'default'
