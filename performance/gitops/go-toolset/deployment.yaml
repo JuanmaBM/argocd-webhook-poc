@@ -14,14 +14,6 @@ spec:
     spec:
       containers:
       - name: go-toolset
-        image: go-toolset:latest
-        # securityContext:
-        #   allowPrivilegeEscalation: false
-        #   runAsNonRoot: true
-        #   seccompProfile:
-        #     type: RuntimeDefault
-        #   capabilities:
-        #     drop:
-        #     - ALL
+        image: registry.redhat.io/ubi9/go-toolset:latest
         ports:
         - containerPort: 8080
