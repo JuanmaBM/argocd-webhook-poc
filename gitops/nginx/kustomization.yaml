@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - service-a
   - service-b
+  - service-c
