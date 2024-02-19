@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: performance-apps-appset
+  namespace: openshift-gitops
+spec:
+  generators:
+    - git:
+        directories:
+          - path: performance/gitops/apps/*
+        repoURL: >-
+          https://github.com/JuanmaBM/argocd-webhook-poc
+        revision: HEAD
+  template:
+    metadata:
+      name: '{{path[1]}}'
+    spec:
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: 'performance'
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

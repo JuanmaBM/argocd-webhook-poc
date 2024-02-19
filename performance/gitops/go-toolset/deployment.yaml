@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-toolset
+spec:
+  selector:
+    matchLabels:
+      app: go-toolset
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: go-toolset
+    spec:
+      containers:
+      - name: go-toolset
+        image: go-toolset:latest
+        # securityContext:
+        #   allowPrivilegeEscalation: false
+        #   runAsNonRoot: true
+        #   seccompProfile:
+        #     type: RuntimeDefault
+        #   capabilities:
+        #     drop:
+        #     - ALL
+        ports:
+        - containerPort: 8080
