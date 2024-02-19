@@ -1,10 +1,15 @@
-project: default
-source:
-  repoURL: 'https://github.com/JuanmaBM/argocd-webhook-poc'
-  path: gitops/app-1
-  targetRevision: HEAD
-destination:
-  server: 'https://kubernetes.default.svc'
-  namespace: app-1
-syncPolicy:
-  automated: {}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 'app-1'
+spec:
+  destination:
+    name: 'app-1'
+    server: 'https://kubernetes.default.svc'
+    namespace: performance
+  source:
+    repoURL: 'https://github.com/JuanmaBM/argocd-webhook-poc'
+    path: performance/gitops/apps/app-1
+    targetRevision: HEAD
+  sources: []
+  project: 'default'
