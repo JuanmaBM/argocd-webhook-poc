@@ -5,7 +5,6 @@ metadata:
   namespace: openshift-gitops
 spec:
   destination:
-    name: 'app-2'
     server: 'https://kubernetes.default.svc'
     namespace: performance
   source:
