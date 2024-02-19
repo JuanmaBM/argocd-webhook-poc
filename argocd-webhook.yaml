@@ -3,24 +3,3 @@ kind: ConfigMap
 metadata:
   name: argocd-notifications-cm
 data:
-  service.webhook.form: |
-    url: http://argocd-event-subscriptor.nginx.svc.cluster.local:8080
-    headers:
-    - name: Content-Type
-      value: application/json
-
-  template.app-sync-succeeded: |
-    webhook:
-      form:
-        method: POST
-        body: |
-          {
-            "app": "{{.app.metadata.name}}",
-            "status": "{{.app.status.operationState.syncResult.resources}}",
-          }
-
-  trigger.on-sync-succeeded: |
-    - description: Application is synced
-      when: app.status.sync.status in ['Synced']
-      send: 
-        - app-sync-succeeded
