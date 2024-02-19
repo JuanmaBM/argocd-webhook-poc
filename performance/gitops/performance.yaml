@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 'performance'
+  namespace: openshift-gitops
+spec:
+  destination:
+    name: 'performance'
+    server: 'https://kubernetes.default.svc'
+    namespace: openshift-gitops
+  source:
+    repoURL: 'https://github.com/JuanmaBM/argocd-webhook-poc'
+    path: performance/gitops/apps
+    targetRevision: HEAD
+  sources: []
+  project: 'default'
