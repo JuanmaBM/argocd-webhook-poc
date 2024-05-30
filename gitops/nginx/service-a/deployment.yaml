@@ -1,27 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-a
+  name: nginx
+  namespace: nginx
 spec:
   selector:
     matchLabels:
-      app: service-a
+      run: nginx
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-a
+        run: nginx
     spec:
+      serviceAccountName: nginx
       containers:
-      - name: service-a
-        image: nginx:latest
-        # securityContext:
-        #   allowPrivilegeEscalation: false
-        #   runAsNonRoot: true
-        #   seccompProfile:
-        #     type: RuntimeDefault
-        #   capabilities:
-        #     drop:
-        #     - ALL
+      - name: nginx
+        image: nginx
         ports:
         - containerPort: 80
