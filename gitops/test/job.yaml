@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      annotations:
+    spec:
+      restartPolicy: Never
+      volumes:
+      - name: cmv
+        configMap:
+          name: cm
+      containers:
+      - name: job
+        image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:52bae04b3fb721ff53a5447515494d18a6db6ac1a4aed693d9bb99d0173ba15c
+        volumeMounts:
+          - mountPath: /scripts
+            name: cmv
+        command:
+          - /bin/bash
+          - -c
+          - |
+            sh /scripts/script.sh
